@@ -16,11 +16,6 @@ hook OnScriptInit() {
     return 1;
 }
 
-hook OnScriptExit() {
-    Vec_Delete(stacks);
-    Idgen_Delete(Stack_generator)
-}
-
 
 /*
     api
@@ -28,12 +23,19 @@ hook OnScriptExit() {
 
 #define INVALID_STACK_ID        (Stack:-1)
 
-stock Stack:Stack_New(capacity) {
-    new id = Idgen_NewId(Stack_generator);
-    new Vec:stack = Vec_New(capacity);
+stock Stack:Stack_New(capacity = -1) {
+    new id = Idgen_NewID(Stack_generator);
+    new Vec:stack;
+    if(capacity == -1) {
+        stack = Vec_New();
+    } else {
+        stack = Vec_New(capacity);
+    }
+    
     if(stack == INVALID_VECTOR_ID) {
         return INVALID_STACK_ID;
     }
+    
     Vec_SetValueVec(stacks, id, stack);
     return Stack:id;
 }
@@ -63,7 +65,9 @@ stock Stack_PushStack(Stack:stack, Stack:value) {
 
 stock Stack_Pop(Stack:stack) {
     new Vec:s = Vec_GetValueVec(stacks, _:stack);
-    return Vec_GetValue(s, Vec_GetLength(s)-1);
+    new val = Vec_GetValue(s, Vec_GetLength(s)-1);
+    Vec_Remove(s, Vec_GetLength(s)-1);
+    return val;
 }
 
 stock Vec:Stack_PopVec(Stack:stack) {
@@ -82,6 +86,33 @@ stock Stack:Stack_PopStack(Stack:stack) {
     return Stack_Pop(stack);
 }
 
+stock Stack_Peek(Stack:stack) {
+    new Vec:s = Vec_GetValueVec(stacks, _:stack);
+    return Vec_GetValue(s, Vec_GetLength(s)-1);
+}
+
+stock Vec:Stack_PeekVec(Stack:stack) {
+    return Stack_Peek(stack);
+}
+
+stock bool:Stack_PeekBool(Stack:stack) {
+    return Stack_Peek(stack);
+}
+
+stock Float:Stack_PeekFloat(Stack:stack) {
+    return Stack_Peek(stack);
+}
+
+stock Stack:Stack_PeekStack(Stack:stack) {
+    return Stack_Peek(stack);
+}
+
+stock bool:Stack_IsEmpty(Stack:stack) {
+    new Vec:s = Vec_GetValueVec(stacks, _:stack);
+    return Vec_GetLength(s) == 0 ? true : false;
+}
+
 stock Stack_Delete(Stack:stack) {
     Vec_Delete(Vec_GetValueVec(stacks, _:stack));
+    Idgen_ReleaseId(Stack_generator, _:stack);
 }

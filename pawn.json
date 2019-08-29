@@ -5,12 +5,12 @@
 	"output": "test.amx",
 	"dependencies": [
 		"sampctl/samp-stdlib",
-		"killermvc/pawn-vector:1.0.7",
-		"killermvc/pawn-idgen:1.0.1"
+		"killermvc/pawn-vector",
+		"killermvc/pawn-idgen"
 	],
 	"runtime": {
 		"version": "0.3.7",
-		"mode": "server",
+		"mode": "y_testing",
 		"echo": "-",
 		"rcon_password": "password",
 		"port": 7777,
