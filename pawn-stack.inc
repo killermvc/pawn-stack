@@ -5,7 +5,7 @@ static Vec:stacks;
 static Idgen:Stack_generator;
 
 
-#include <YSI\y_hooks>
+#include <YSI_Coding\y_hooks>
 
 hook OnScriptInit() {
     stacks = Vec_New(10);
@@ -25,14 +25,15 @@ hook OnScriptInit() {
 
 stock Stack:Stack_New(capacity = -1) {
     new id = Idgen_NewID(Stack_generator);
+    
     new Vec:stack;
-    if(capacity == -1) {
+    if(capacity == -1) {        
         stack = Vec_New();
     } else {
         stack = Vec_New(capacity);
     }
     
-    if(stack == INVALID_VECTOR_ID) {
+    if(stack == INVALID_VECTOR_ID) {        
         return INVALID_STACK_ID;
     }
     
@@ -115,4 +116,8 @@ stock bool:Stack_IsEmpty(Stack:stack) {
 stock Stack_Delete(Stack:stack) {
     Vec_Delete(Vec_GetValueVec(stacks, _:stack));
     Idgen_ReleaseId(Stack_generator, _:stack);
+}
+
+stock Stack_IsValid(Stack:stack) {
+    return Idgen_IsValidID(Stack_generator, _:stack);
 }
