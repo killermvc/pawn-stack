@@ -36,3 +36,12 @@ Test:IsEmpty() {
     Stack_Pop(stack);
     ASSERT(Stack_IsEmpty(stack));
 }
+
+Test:CreateMany() {
+    const size = 500;
+    new Stack:stacks[size];
+
+    for(new i = 0; i < size; i++) {
+        stacks[i] = Stack_New(50);
+    }
+}

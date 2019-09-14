@@ -1,30 +1,9 @@
 #include <pawn-vector>
 #include <pawn-idgen>
 
-static Vec:stacks;
-static Idgen:Stack_generator;
-
-
-#include <YSI_Coding\y_hooks>
-
-hook OnScriptInit() {
-    stacks = Vec_New(10);
-    if(stacks == INVALID_VECTOR_ID) {
-        P:F("PAWN-STACK couldn't allocate memory for storing the stacks");
-    }
-    Stack_generator = Idgen_New(UNLIMITED_CAPACITY);
-    return 1;
-}
-
-
-/*
-    api
-*/
-
 #define INVALID_STACK_ID        (Stack:-1)
 
 stock Stack:Stack_New(capacity = -1) {
-    new id = Idgen_NewID(Stack_generator);
     
     new Vec:stack;
     if(capacity == -1) {        
@@ -37,12 +16,11 @@ stock Stack:Stack_New(capacity = -1) {
         return INVALID_STACK_ID;
     }
     
-    Vec_SetValueVec(stacks, id, stack);
-    return Stack:id;
+    return Stack:stack;
 }
 
 stock Stack_Push(Stack:stack, value) {
-    if(Vec_Append(Vec_GetValueVec(stacks, _:stack), value) != VEC_OK) {
+    if(Vec_Append(Vec:stack, value) != VEC_OK) {
         return 1;
     }
     return 0;
@@ -65,9 +43,8 @@ stock Stack_PushStack(Stack:stack, Stack:value) {
 }
 
 stock Stack_Pop(Stack:stack) {
-    new Vec:s = Vec_GetValueVec(stacks, _:stack);
-    new val = Vec_GetValue(s, Vec_GetLength(s)-1);
-    Vec_Remove(s, Vec_GetLength(s)-1);
+    new val = Vec_GetValue(Vec:stack, Vec_GetLength(Vec:stack)-1);
+    Vec_Remove(Vec:stack, Vec_GetLength(Vec:stack)-1);
     return val;
 }
 
@@ -88,8 +65,7 @@ stock Stack:Stack_PopStack(Stack:stack) {
 }
 
 stock Stack_Peek(Stack:stack) {
-    new Vec:s = Vec_GetValueVec(stacks, _:stack);
-    return Vec_GetValue(s, Vec_GetLength(s)-1);
+    return Vec_GetValue(Vec:stack, Vec_GetLength(Vec:stack)-1);
 }
 
 stock Vec:Stack_PeekVec(Stack:stack) {
@@ -109,15 +85,9 @@ stock Stack:Stack_PeekStack(Stack:stack) {
 }
 
 stock bool:Stack_IsEmpty(Stack:stack) {
-    new Vec:s = Vec_GetValueVec(stacks, _:stack);
-    return Vec_GetLength(s) == 0 ? true : false;
+    return Vec_GetLength(Vec:stack) == 0 ? true : false;
 }
 
 stock Stack_Delete(Stack:stack) {
-    Vec_Delete(Vec_GetValueVec(stacks, _:stack));
-    Idgen_ReleaseId(Stack_generator, _:stack);
-}
-
-stock Stack_IsValid(Stack:stack) {
-    return Idgen_IsValidID(Stack_generator, _:stack);
+    Vec_Delete(Vec:stack);
 }

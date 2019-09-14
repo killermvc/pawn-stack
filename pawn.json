@@ -7,7 +7,7 @@
 	"dependencies": [
 		"sampctl/samp-stdlib",
 		"killermvc/pawn-vector",
-		"killermvc/pawn-idgen"
+		"killermvc/pawn-idgen:1.0.2"
 	],
 	"runtime": {
 		"version": "0.3.7",
