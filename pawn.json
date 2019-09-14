@@ -6,8 +6,7 @@
 	"output": "test.amx",
 	"dependencies": [
 		"sampctl/samp-stdlib",
-		"killermvc/pawn-vector",
-		"killermvc/pawn-idgen:1.0.2"
+		"killermvc/pawn-vector"
 	],
 	"runtime": {
 		"version": "0.3.7",

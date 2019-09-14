@@ -1,5 +1,4 @@
 #include <pawn-vector>
-#include <pawn-idgen>
 
 #define INVALID_STACK_ID        (Stack:-1)
 
