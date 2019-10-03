@@ -43,7 +43,7 @@ stock Stack_PushStack(Stack:stack, Stack:value) {
 
 stock Stack_Pop(Stack:stack) {
     new val = Vec_GetValue(Vec:stack, Vec_GetLength(Vec:stack)-1);
-    Vec_Remove(Vec:stack, Vec_GetLength(Vec:stack)-1);
+    Vec_RemoveAt(Vec:stack, Vec_GetLength(Vec:stack)-1);
     return val;
 }
 
