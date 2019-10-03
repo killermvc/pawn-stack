@@ -32,7 +32,7 @@ Test:IsEmpty() {
 
     Stack_Push(stack, 10);
     ASSERT(!Stack_IsEmpty(stack));
-    
+
     Stack_Pop(stack);
     ASSERT(Stack_IsEmpty(stack));
 }

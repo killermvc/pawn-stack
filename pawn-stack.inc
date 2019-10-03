@@ -3,18 +3,18 @@
 #define INVALID_STACK_ID        (Stack:-1)
 
 stock Stack:Stack_New(capacity = -1) {
-    
+
     new Vec:stack;
-    if(capacity == -1) {        
+    if(capacity == -1) {
         stack = Vec_New();
     } else {
         stack = Vec_New(capacity);
     }
-    
-    if(stack == INVALID_VECTOR_ID) {        
+
+    if(stack == INVALID_VECTOR_ID) {
         return INVALID_STACK_ID;
     }
-    
+
     return Stack:stack;
 }
 
