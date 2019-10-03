@@ -16,6 +16,6 @@
 		"port": 7777,
 		"hostname": "SA-MP Server",
 		"maxplayers": 50,
-		"language": ""		
+		"language": ""
 	}
 }
