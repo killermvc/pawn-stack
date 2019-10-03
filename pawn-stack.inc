@@ -64,6 +64,9 @@ stock Stack:Stack_PopStack(Stack:stack) {
 }
 
 stock Stack_Peek(Stack:stack) {
+    if(Vec_GetLength(Vec:stack) == 0) {
+        return 0;
+    }
     return Vec_GetValue(Vec:stack, Vec_GetLength(Vec:stack)-1);
 }
 
