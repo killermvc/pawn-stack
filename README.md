@@ -37,7 +37,7 @@ sampctl package install killermvc/pawn-stack
 Include in your code and begin using the library:
 
 ```pawn
-#include <pawn-stack>
+#include <stack>
 ```
 
 ## Usage

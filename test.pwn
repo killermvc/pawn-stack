@@ -1,6 +1,6 @@
 #define RUN_TESTS
 #include <a_samp>
-#include "pawn-stack.inc"
+#include "stack.inc"
 #include <YSI_Core\y_testing>
 
 Test:PushPop() {

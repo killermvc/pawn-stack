@@ -1,4 +1,14 @@
-#include <pawn-vector>
+#if defined _inc_stack
+    #undef _inc_stack
+#endif
+
+#if defined _pawnStack_included
+    #endinput
+#endif
+
+#define _pawnStack_included
+
+#include <vector>
 
 #define INVALID_STACK_ID        (Stack:-1)
 
